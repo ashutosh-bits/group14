@@ -1,1 +1,24 @@
-test
+How to run tgn training:
+
+1. Use tgn_paper.ipynb in colab
+2. Notebook will create "data" directory. Please upload "wikipedia.csv" file in data directory with exact name.
+3. The notebook will automatically load data from this fiel during execution while executing.
+4. With all above steps you will be able to run pre_process data. It takes raw .csv interaction logs and processes them to generate .npy (NumPy binary) files for faster access and efficient training.
+5. If you start running training on the cloned code, it will fail with below error:
+         TypeError: Population must be a sequence. For dicts or sets, use sorted(d).
+6. Open utils/data_processing.py, and go to line where random.sample() is used (line 81).
+7. Make below change: 
+From : - new_test_node_set = set(random.sample(test_node_set, int(0.1 * n_total_unique_nodes)))
+To : - new_test_node_set = set(random.sample(sorted(test_node_set), int(0.1 * n_total_unique_nodes)))
+8. With this, the training should go fine.
+
+
+
+How to run visualization:
+1. load TGN_graph_animation.ipynb
+2. All you need to do is to load the "ml_wikipedia_s.csv" file in data. 
+3. Run the whole code from colab and it should start showing visualization.
+
+How to see Demo:
+1. Open huggingface demo site app.
+2. Sart playing with various inputs.
