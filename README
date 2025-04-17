@@ -1,1 +1,19 @@
-test
+Datasets
+Wikipedia : http://snap.stanford.edu/jodie/wikipedia.csv
+
+
+Training Process
+Load the tgn git repository  
+  !git clone https://github.com/twitter-research/tgn
+  %cd tgn
+Load wikipdia csv data, which is set of tensors for source, destination, edge features etc.
+  !mkdir data
+  !wget -P data http://snap.stanford.edu/jodie/wikipedia.csv
+Pre-process data t- It takes raw .csv interaction logs and processes them to generate .npy (NumPy binary) files for faster access and efficient training.
+  !python3 utils/preprocess_data.py --data wikipedia --bipartite
+Training options
+ train_self_supervised.py →  self-supervised link prediction (temporal edge prediction)
+ !python3 train_self_supervised.py --use_memory --prefix tgn-attn --n_runs 10
+ train_supervised.py             →  supervised learning (e.g., edge classification)
+Model is generated in model folder, downloaded the pth file.
+
